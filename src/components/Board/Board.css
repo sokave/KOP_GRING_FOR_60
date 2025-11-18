@@ -1,0 +1,10 @@
+.board {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #61dafb;
+}
+
+.board-row {
+    display: flex;
+    flex-flow: row nowrap;
+}
