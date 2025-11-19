@@ -1,10 +1,12 @@
 import React from 'react';
 import './Square.css';
 
-const Square = () => {
+const Square = ({ value, onClick }) => {
+    const styleClass = value ? `square ${value.toLowerCase()}` : 'square';
+
     return (
-        <button className="square">
-            {/* Тут буде 'X' або 'O' */}
+        <button className={styleClass} onClick={onClick}>
+            {value}
         </button>
     );
 };

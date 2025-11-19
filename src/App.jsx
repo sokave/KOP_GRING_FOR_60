@@ -1,18 +1,20 @@
 import React, { useState } from 'react';
-import './index.css'; // Базові стилі
-
+import './index.css';
 import StartPage from './pages/StartPage/StartPage';
 import GamePage from './pages/GamePage/GamePage';
 import ResultsPage from './pages/ResultsPage/ResultsPage';
 
 function App() {
-    const [currentPage, setCurrentPage] = useState('start'); // варіанти: 'start', 'game', 'results'
+    const [currentPage, setCurrentPage] = useState('start');
+    const [gameResult, setGameResult] = useState(null);
 
     const handleStartGame = () => {
+        setGameResult(null);
         setCurrentPage('game');
     };
 
-    const handleGameEnd = () => {
+    const handleGameEnd = (result) => {
+        setGameResult(result);
         setCurrentPage('results');
     };
 
@@ -27,7 +29,7 @@ function App() {
             case 'game':
                 return <GamePage onGameEnd={handleGameEnd} />;
             case 'results':
-                return <ResultsPage onPlayAgain={handlePlayAgain} />;
+                return <ResultsPage result={gameResult} onPlayAgain={handlePlayAgain} />;
             default:
                 return <StartPage onStartGame={handleStartGame} />;
         }
@@ -35,10 +37,7 @@ function App() {
 
     return (
         <div className="App">
-            {/* 1 пейдж */}
-            <main>
-                {renderPage()}
-            </main>
+            <main>{renderPage()}</main>
         </div>
     );
 }
