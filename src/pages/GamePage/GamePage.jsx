@@ -1,14 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Board from '../../components/Board/Board';
+import { useTicTac } from '../../hook/useTicTac';
 
 const GamePage = ({ onGameEnd }) => {
-    return (
-        <div>
-            <h2>Current Player: X</h2>
-            <Board /> {/* sfdgdsfd */}
+    const { squares, status, winner, isDraw, handleClick } = useTicTac();
 
-            {/*кнопкa імітує завершення гри */}
-            <button onClick={onGameEnd}>Simulate Game End</button>
+    useEffect(() => {
+        if (winner || isDraw) {
+            const timer = setTimeout(() => {
+                onGameEnd(winner || 'Draw');
+            }, 1000);
+            return () => clearTimeout(timer);
+        }
+    }, [winner, isDraw, onGameEnd]);
+
+    return (
+        <div className="game-page">
+            <h2>{status}</h2>
+            <Board squares={squares} onSquareClick={handleClick} />
         </div>
     );
 };

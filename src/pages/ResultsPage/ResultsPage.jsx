@@ -1,10 +1,10 @@
 import React from 'react';
 
-const ResultsPage = ({ onPlayAgain }) => {
+const ResultsPage = ({ onPlayAgain, result }) => {
     return (
         <div>
             <h2>Game Over!</h2>
-            <p>Player X Wins!</p> {/*  плейсхолдер */}
+            <h3>{result === 'Draw' ? 'It is a Draw!' : `Winner: Player ${result}`}</h3>
             <button onClick={onPlayAgain}>Play Again</button>
         </div>
     );
