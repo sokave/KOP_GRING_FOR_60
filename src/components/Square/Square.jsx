@@ -1,13 +1,38 @@
 import React from 'react';
-import './Square.css';
+import styled from 'styled-components';
+
+const StyledButton = styled.button`
+  background: #fff;
+  border: 1px solid #999;
+  float: left;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 34px;
+  height: 100px;
+  width: 100px;
+  margin-right: -1px;
+  margin-top: -1px;
+  padding: 0;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.3s;
+
+  color: ${props => props.$value === 'X' ? '#ff6b6b' : '#4ecdc4'};
+  
+  &:hover {
+    background: #f0f8ff;
+  }
+
+  &:focus {
+    outline: none;
+  }
+`;
 
 const Square = ({ value, onClick }) => {
-    const styleClass = value ? `square ${value.toLowerCase()}` : 'square';
-
     return (
-        <button className={styleClass} onClick={onClick}>
+        <StyledButton onClick={onClick} $value={value}>
             {value}
-        </button>
+        </StyledButton>
     );
 };
 
