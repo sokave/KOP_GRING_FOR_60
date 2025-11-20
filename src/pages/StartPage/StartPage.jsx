@@ -1,34 +1,14 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useNavigate } from 'react-router-dom';
 
 import { useGame } from '../../context/GameContext';
 import { configSchema } from './configSchema';
 
-const formStyles = {
-    input: {
-        padding: '8px',
-        margin: '10px 0',
-        borderRadius: '4px',
-        border: '1px solid #ccc',
-        width: '200px',
-    },
-    error: {
-        color: 'red',
-        fontSize: '0.9rem',
-        marginTop: '-5px',
-    },
-    form: {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        gap: '5px'
-    }
-};
-
-
-const StartPage = ({ onStartGame }) => {
+const StartPage = () => {
     const { settings, updateSettings, resetScore } = useGame();
+    const navigate = useNavigate();
 
     const {
         register,
@@ -48,40 +28,24 @@ const StartPage = ({ onStartGame }) => {
         if (isDirty) {
             resetScore();
         }
-        onStartGame();
+
+        const gameId = Date.now().toString();
+
+        navigate(`/game/${gameId}`);
     };
 
     return (
         <div>
             <h1>Tic-Tac-Toe</h1>
-            <h3>Score: {settings.playerXName} ({settings.scoreX}) vs {settings.playerOName} ({settings.scoreO})</h3>
-            <p>Enter player names to start the game:</p>
+            <form onSubmit={handleSubmit(onSubmit)} style={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px'}}>
+                <input {...register('playerXName')} placeholder="Player X Name" />
+                <p style={{color: 'red'}}>{errors.playerXName?.message}</p>
 
-            <form onSubmit={handleSubmit(onSubmit)} style={formStyles.form}>
+                <input {...register('playerOName')} placeholder="Player O Name" />
+                <p style={{color: 'red'}}>{errors.playerOName?.message}</p>
 
-                {/* Player X */}
-                <input
-                    {...register('playerXName')}
-                    style={formStyles.input}
-                    placeholder="Name for Player X"
-                />
-                {errors.playerXName && <p style={formStyles.error}>{errors.playerXName.message}</p>}
-
-                {/* Player O */}
-                <input
-                    {...register('playerOName')}
-                    style={formStyles.input}
-                    placeholder="Name for Player O"
-                />
-                {errors.playerOName && <p style={formStyles.error}>{errors.playerOName.message}</p>}
-
-                {/* Кнопка деактивована якщо форма не валідна */}
-                <button type="submit" disabled={!isValid}>
-                    Start Game
-                </button>
+                <button type="submit" disabled={!isValid}>Start Game</button>
             </form>
-
-            <button onClick={resetScore} style={{ marginTop: '20px' }}>Reset Score</button>
         </div>
     );
 };

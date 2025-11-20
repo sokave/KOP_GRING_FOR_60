@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+
 import Board from '../../components/Board/Board';
 import Modal from '../../components/Modal/Modal';
 import { useTicTac } from '../../hook/useTicTac';
 import { useGame } from '../../context/GameContext';
 
-const GamePage = ({ onGameEnd }) => {
+const GamePage = () => {
+    const { id } = useParams();
+    const navigate = useNavigate();
+
     const { squares, winner, isDraw, handleClick, status, resetGame } = useTicTac();
     const { settings, updateScore } = useGame();
-
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const currentPlayerName = status.includes('Next player: X') ? settings.playerXName : settings.playerOName;
@@ -19,13 +23,11 @@ const GamePage = ({ onGameEnd }) => {
 
     useEffect(() => {
         if (winner || isDraw) {
-            if (winner) {
-                updateScore(winner);
-            }
+            if (winner) updateScore(winner);
             setIsModalOpen(true);
-
         }
     }, [winner, isDraw, updateScore]);
+
 
     const handleNextTour = () => {
         setIsModalOpen(false);
@@ -35,30 +37,20 @@ const GamePage = ({ onGameEnd }) => {
     const handleNewGame = () => {
         setIsModalOpen(false);
         resetGame();
-        onGameEnd();
+        navigate('/');
     };
-
-    const handleCloseModal = () => {
-        setIsModalOpen(false);
-        onGameEnd();
-    }
-
 
     return (
         <div className="game-page">
+            <p style={{color: '#888', fontSize: '0.8rem'}}>Session ID: {id}</p> {/* Показуємо ID */}
             <h2>{statusMessage}</h2>
             <Board squares={squares} onSquareClick={handleClick} />
-            <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
 
+            <Modal isOpen={isModalOpen} onClose={handleNewGame}>
                 <h3>Game Over!</h3>
                 <p>{statusMessage}</p>
-                <button onClick={handleNextTour} style={{ margin: '10px' }}>
-                    Start Next Tour (Score: {settings.scoreX} - {settings.scoreO})
-                </button>
-                <button onClick={handleNewGame} style={{ margin: '10px' }}>
-                    Configure New Game
-                </button>
-
+                <button onClick={handleNextTour}>Next Tour</button>
+                <button onClick={handleNewGame}>New Config</button>
             </Modal>
         </div>
     );
