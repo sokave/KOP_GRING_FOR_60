@@ -1,38 +1,41 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 
 import Board from '../../components/Board/Board';
 import Modal from '../../components/Modal/Modal';
 import { useTicTac } from '../../hook/useTicTac';
-import { useGame } from '../../context/GameContext';
+import { addGameResult } from '../../store/gameSlice';
 
 const GamePage = () => {
     const { id } = useParams();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const { playerXName, playerOName } = useSelector((state) => state.game);
 
     const { squares, winner, isDraw, handleClick, status, resetGame } = useTicTac();
-    const { settings, updateScore } = useGame();
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const currentPlayerName = status.includes('Next player: X') ? settings.playerXName : settings.playerOName;
+    const currentPlayerName = status.includes('Next player: X') ? playerXName : playerOName;
     const statusMessage = winner
-        ? `Winner: ${winner === 'X' ? settings.playerXName : settings.playerOName}`
+        ? `Winner: ${winner === 'X' ? playerXName : playerOName}`
         : isDraw
             ? "It is a Draw!"
             : `Next player: ${currentPlayerName}`;
 
     useEffect(() => {
         if (winner || isDraw) {
-            if (winner) updateScore(winner);
+            const resultData = {
+                id: id,
+                winner: winner ? (winner === 'X' ? playerXName : playerOName) : 'Draw',
+                date: new Date().toLocaleString()
+            };
+            dispatch(addGameResult(resultData));
+
             setIsModalOpen(true);
         }
-    }, [winner, isDraw, updateScore]);
-
-
-    const handleNextTour = () => {
-        setIsModalOpen(false);
-        resetGame();
-    };
+    }, [winner, isDraw, id, playerXName, playerOName, dispatch]);
 
     const handleNewGame = () => {
         setIsModalOpen(false);
@@ -40,17 +43,21 @@ const GamePage = () => {
         navigate('/');
     };
 
+    const handleToScoreboard = () => {
+        navigate('/scoreboard');
+    };
+
     return (
         <div className="game-page">
-            <p style={{color: '#888', fontSize: '0.8rem'}}>Session ID: {id}</p> {/* Показуємо ID */}
+            <p>Session: {id}</p>
             <h2>{statusMessage}</h2>
             <Board squares={squares} onSquareClick={handleClick} />
 
             <Modal isOpen={isModalOpen} onClose={handleNewGame}>
                 <h3>Game Over!</h3>
                 <p>{statusMessage}</p>
-                <button onClick={handleNextTour}>Next Tour</button>
-                <button onClick={handleNewGame}>New Config</button>
+                <button onClick={handleNewGame}>Back to Settings</button>
+                <button onClick={handleToScoreboard}>View Scoreboard</button>
             </Modal>
         </div>
     );
