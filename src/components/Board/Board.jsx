@@ -2,6 +2,14 @@ import React from 'react';
 import Square from '../Square/Square';
 import './Board.css';
 
+/**
+ * Компонент Board
+ * Відображає ігрове поле 3x3
+ * @param {Object} props
+ * @param {Array} props.squares - Масив клітинок
+ * @param {Function} props.onSquareClick - Обробник кліку по клітинці
+ */
+
 const Board = ({ squares, onSquareClick }) => {
 
     const renderSquare = (i) => {

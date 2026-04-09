@@ -1,6 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-
+/**
+ * Компонент Square
+ * Відображає одну клітинку гри (X або O)
+ * @param {Object} props
+ * @param {string} props.value - Значення клітинки (X або O)
+ * @param {Function} props.onClick - Обробник кліку
+ */
 const StyledButton = styled.button`
   background: #fff;
   border: 1px solid #999;
