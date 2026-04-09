@@ -1,16 +1,155 @@
-# React + Vite
+# TicTacToe_KOP_GRIND_60
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Опис проєкту
+Це вебзастосунок, створений у межах навчальної дисципліни КОП.  
+Проєкт реалізований на базі **React + Vite** та доповнений матеріалами зі стандартизації й документування програмного забезпечення.
 
-Currently, two official plugins are available:
+У межах поточного доопрацювання до проєкту додано:
+- README з інструкціями;
+- ліцензію;
+- звіт про ліцензії залежностей;
+- cookie popup згідно з вимогами GDPR;
+- Privacy Policy / User Guide;
+- згенеровану документацію;
+- Storybook для компонентів.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## Технології
+- React
+- Vite
+- JavaScript
+- Redux Toolkit
+- React Router DOM
+- Styled Components
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+---
 
-## Expanding the ESLint configuration
+## Вимоги до середовища
+Перед запуском переконайтесь, що встановлено:
+- Node.js
+- npm
+- Git
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## Встановлення проєкту
+Склонуйте репозиторій:
+
+```bash
+-- git clone https://github.com/sokave/KOP_GRING_FOR_60.git
+-- cd KOP_GRING_FOR_60
+```
+
+--- 
+
+
+### Встановіть залежності:
+```bash
+npm install
+```
+--- 
+### Основні команди
+
+### Запуск проєкту в режимі розробки
+```bash
+npm run dev
+```
+
+### Збірка проєкту
+```bash
+npm run build
+```
+
+### Перегляд production-збірки
+```bash
+npm run preview
+```
+
+### Перевірка коду
+```bash
+npm run lint
+```
+--- 
+
+## Структура проєкту
+
+
+- KOP_GRING_FOR_60/
+- ├── src/                  # основний код застосунку
+- ├── public/               # статичні файли
+- ├── README.md             # опис проєкту
+- ├── LICENSE               # ліцензія проєкту
+- ├── LICENSE-REPORT.md     # звіт про ліцензії залежностей
+- ├── PRIVACY_POLICY.md     # політика конфіденційності
+- ├── USER_GUIDE.md         # інструкція користувача
+- ├── jsdoc.json            # конфігурація генерації документації
+- ├── docs/                 # згенерована локальна документація
+- └── .storybook/           # конфігурація Storybook
+
+--- 
+
+## Документація
+
+У проєкті передбачено локальну технічну документацію, згенеровану автоматично засобами документування коду. Після завершення налаштування вона буде доступна у папці docs/.
+
+### Документація створюється з метою:
+
+- опису структури коду;
+- спрощення підтримки проєкту;
+- покращення зрозумілості компонентів і функцій;
+- відповідності вимогам навчального завдання.
+- Storybook
+
+Для документування компонентів інтерфейсу в проєкті використовується Storybook.
+
+--- 
+
+## У Storybook описано:
+
+- базовий компонент;
+- комплексний компонент.
+
+### Для кожного компонента передбачено:
+
+* налаштування властивостей;
+* декілька варіацій відображення;
+* приклади використання.
+* Політика конфіденційності
+
+Проєкт містить cookie popup та документацію, що описує обробку cookies і базові правила використання застосунку відповідно до вимог GDPR.
+
+---
+
+### Основний документ:
+
+- Privacy Policy
+- Інструкція користувача
+
+Інструкція з використання застосунку подана в окремому документі:
+
+User Guide
+Ліцензія
+
+Цей проєкт поширюється на умовах ліцензії MIT.
+
+---
+
+## Повний текст ліцензії:
+
+- LICENSE
+
+- Звіт про ліцензії сторонніх залежностей:
+
+- LICENSE-REPORT.md
+---
+
+## Автор
+
+- Некрасов Артур
+- Факультет комп’ютерних технологій
+- Група ІПЗ-23-3
+---
+* Навчальний проєкт, підготовлений у межах дисципліни
+«Стандартизація та документування програмного забезпечення»
+---
