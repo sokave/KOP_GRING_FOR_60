@@ -4,6 +4,7 @@ import StartPage from './pages/StartPage/StartPage';
 import GamePage from './pages/GamePage/GamePage';
 import ScoreboardPage from './pages/ScoreboardPage/ScoreboardPage';
 import './index.css';
+import CookieBanner from "./components/CookieBanner";
 
 function App() {
     return (
@@ -16,6 +17,7 @@ function App() {
                     <Route path="*" element={<Navigate to="/" replace />} />
                 </Routes>
             </div>
+            <CookieBanner />
         </BrowserRouter>
     );
 }
