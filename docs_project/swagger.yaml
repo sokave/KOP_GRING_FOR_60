@@ -1,0 +1,38 @@
+openapi: 3.0.0
+info:
+  title: API TicTacToe
+  version: 1.0.0
+  description: Навчальний опис API
+
+paths:
+  /game:
+    get:
+      summary: Отримати стан гри
+      responses:
+        '200':
+          description: Стан гри отримано
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  board:
+                    type: array
+                    items:
+                      type: string
+
+  /move:
+    post:
+      summary: Зробити хід
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                position:
+                  type: integer
+      responses:
+        '200':
+          description: Хід виконано
